@@ -1,0 +1,40 @@
+{
+  "name": "smart-city",
+  "version": "1.0.0",
+  "description": "chatbot which can handle the request like id application and large garbage collection",
+  "main": "index.js",
+  "dependencies": {
+    "bot-express": "^0.1.11",
+    "debug": "^3.1.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "line-pay": "^1.0.10",
+    "mecabaas-client": "^1.0.3",
+    "memory-cache": "^0.2.0",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^4.1.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkjm/smart-city.git"
+  },
+  "keywords": [
+    "bot",
+    "chatbot",
+    "smart-city"
+  ],
+  "author": "Kazuki Nakajima",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nkjm/smart-city/issues"
+  },
+  "homepage": "https://github.com/nkjm/smart-city#readme"
+}
