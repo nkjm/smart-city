@@ -277,7 +277,7 @@ module.exports = class SkillJuminhyo {
                 name: "pay",
                 parameters: {
                     productName: "住民票",
-                    amount: 1,
+                    amount: 300,
                     currency: "JPY",
                     orderId: `${bot.extract_sender_id()}-${Date.now()}`,
                     message_text: `了解です。決済完了後に住民票をご自宅に発送します。下記のボタンから決済にお進みください。`

@@ -333,7 +333,7 @@ module.exports = class SkillGarbageCollection {
                 name: "pay",
                 parameters: {
                     productName: "大型ゴミ処理",
-                    amount: 1,
+                    amount: 600 * Number(context.confirmed.quantity),
                     currency: "JPY",
                     orderId: `${bot.extract_sender_id()}-${Date.now()}`,
                     message_text: `${name}さん、大型ゴミの収集を承りました。下記のボタンから大型ゴミ処理費用の決済にお進みください。`
