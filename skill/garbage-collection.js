@@ -175,7 +175,7 @@ module.exports = class SkillGarbageCollection {
                     type: "template",
                     altText: `費用のお支払い方法を選択してください。`,
                     template: {
-                        type: "confirm",
+                        type: "buttons",
                         text: `費用のお支払い方法を選択してください。`,
                         actions: [
                             {type: "message", label: "LINE Pay", text: "LINE Pay"},
@@ -323,22 +323,28 @@ module.exports = class SkillGarbageCollection {
         }
 
         // Payment should be LINE Pay
-        return line_event.fire({
-            type: "bot-express:push",
-            to: {
-                type: "user",
-                userId: bot.extract_sender_id()
-            },
-            intent: {
-                name: "pay",
-                parameters: {
-                    productName: "大型ゴミ処理",
-                    amount: 600 * Number(context.confirmed.quantity),
-                    currency: "JPY",
-                    orderId: `${bot.extract_sender_id()}-${Date.now()}`,
-                    message_text: `${name}さん、大型ゴミの収集を承りました。下記のボタンから大型ゴミ処理費用の決済にお進みください。`
-                }
-            }
+        return bot.reply({
+            type: "text",
+            text: `${name}さん、大型ゴミの収集を承りました。`
+        }).then((response) => {
+            return line_event.fire({
+                type: "bot-express:push",
+                to: {
+                    type: "user",
+                    userId: bot.extract_sender_id()
+                },
+                intent: {
+                    name: "pay",
+                    parameters: {
+                        productName: "大型ゴミ処理",
+                        amount: 600 * Number(context.confirmed.quantity),
+                        currency: "JPY",
+                        orderId: `${bot.extract_sender_id()}-${Date.now()}`,
+                        message_text: `下記のボタンから処理費用の決済にお進みください。`
+                    }
+                },
+                language: context.sender_language
+            });
         }).then((response) => {
             return resolve();
         });

@@ -116,7 +116,7 @@ module.exports = class SkillJuminhyo {
                     type: "template",
                     altText: "手数料は300円になります。お支払い方法を選択してください。",
                     template: {
-                        type: "confirm",
+                        type: "buttons",
                         text: "手数料は300円になります。お支払い方法を選択してください。",
                         actions: [
                             {type: "message", label: "LINE Pay", text: "LINE Pay"},
@@ -287,7 +287,7 @@ module.exports = class SkillJuminhyo {
                         message_text: `下記のボタンから決済にお進みください。`
                     }
                 },
-                language: "en"
+                language: context.sender_language
             });
         }).then((response) => {
             return resolve();
