@@ -155,7 +155,7 @@ module.exports = class SkillJuminhyo {
                     if (value == "はい"){
                         bot.queue({
                             type: "text",
-                            text: "ナイスなお名前じゃないですか〜。"
+                            text: "良いお名前ですね！"
                         });
                     } else {
                         bot.queue({
