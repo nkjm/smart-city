@@ -7,23 +7,37 @@ const nlu = require("../service/dialogflow");
 Promise = require('bluebird');
 
 module.exports = class ServiceParser {
-    static name(value, resolve, reject){
-        return mecab.parse(value).then(
-            (response) => {
-                let name = {};
-                for (let elem of response){
-                    if (elem[3] == "人名" && elem[4] == "姓"){
-                        name.lastname = elem[0];
-                    } else if (elem[3] == "人名" && elem[4] == "名"){
-                        name.firstname = elem[0];
+    static name(lang, value, resolve, reject){
+        if (lang === "ja" || !lang){
+            return mecab.parse(value).then(
+                (response) => {
+                    let name = {};
+                    for (let elem of response){
+                        if (elem[3] == "人名" && elem[4] == "姓"){
+                            name.lastname = elem[0];
+                        } else if (elem[3] == "人名" && elem[4] == "名"){
+                            name.firstname = elem[0];
+                        }
                     }
+                    return resolve(name);
+                },
+                (response) => {
+                    return reject(response);
                 }
-                return resolve(name);
-            },
-            (response) => {
-                return reject(response);
-            }
-        );
+            );
+        }
+        let name_arr = value.split(" ");
+        let name = {};
+        if (name_arr.length === 2){
+            name.lastname = name_arr[1];
+            name.firstname = name_arr[0];
+            return resolve(name);
+        } else (name_arr.length === 3){
+            name.lastname = name_arr[2];
+            name.firstname = name_arr[0];
+            return resolve(name):
+        }
+        return reject();
     }
 
     static zip_code(value, resolve, reject){

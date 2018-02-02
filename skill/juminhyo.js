@@ -40,7 +40,7 @@ module.exports = class SkillJuminhyo {
                     text: "次にご本人のことを少々。お名前教えてもらえますか？"
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.name(value, resolve, reject);
+                    parse.name(context.sender_language, value, resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
