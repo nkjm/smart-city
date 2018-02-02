@@ -283,7 +283,7 @@ module.exports = class SkillJuminhyo {
                     message_text: `了解です。決済完了後に住民票をご自宅に発送します。下記のボタンから決済にお進みください。`
                 }
             },
-            language: "ja"
+            language: "en"
         }).then((response) => {
             return resolve();
         });

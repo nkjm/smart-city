@@ -28,7 +28,7 @@ module.exports = class SkillPay {
             confirmUrlType: {}
         }
 
-        this.clear_context_on_finish = false;
+        this.clear_context_on_finish = true;
     }
 
     finish(bot, event, context, resolve, reject){
