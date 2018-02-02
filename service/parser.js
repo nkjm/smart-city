@@ -3,6 +3,8 @@
 const debug = require('debug')('bot-express:service');
 const mecab = require("mecabaas-client");
 const zip_code = require("../service/zip-code");
+const nlu = require("../service/dialogflow");
+const uuid = require("uuid/v4");
 Promise = require('bluebird');
 
 module.exports = class ServiceParser {
@@ -49,11 +51,30 @@ module.exports = class ServiceParser {
         );
     }
 
+    /*
     static by_list(value, acceptable_values, resolve, reject){
         if (acceptable_values.includes(value)){
             return resolve(value);
         }
         return reject();
+    }
+    */
+
+    static by_list(lang, value, acceptable_values, resolve, reject){
+        debug("Going to understand value by NLU.");
+        const session_id = uuid();
+        return nlu.query(lang, session_id, value).then((response) => {
+            if (result.result.action === "parser"){
+                debug("Entity found.")
+                if (response.result.parameters && response.result.parameters[Object.keys(response.result.parameters)[0]]){
+                    if (acceptable_values.includes(response.result.parameters[Object.keys(response.result.parameters)[0]])){
+                        debug("Recognized and accepted the value.");
+                        return resolve(response.result.parameters[Object.keys(response.result.parameters)[0]]);
+                    }
+                }
+            }
+            return reject();
+        })
     }
 
     static garbage(value, resolve, reject){
