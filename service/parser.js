@@ -35,7 +35,7 @@ module.exports = class ServiceParser {
         } else if (name_arr.length === 3){
             name.lastname = name_arr[2];
             name.firstname = name_arr[0];
-            return resolve(name):
+            return resolve(name);
         }
         return reject();
     }
