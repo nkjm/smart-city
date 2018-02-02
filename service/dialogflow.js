@@ -2,7 +2,7 @@
 
 const request = require('request');
 const debug = require("debug")("bot-express:service");
-const URL_BASE = `https://api.api.ai/v1`;
+const URL_BASE = `https://api.dialogflow.com/v1/`;
 const DIALOGFLOW_DEVELOPER_ACCESS_TOKEN = process.env.DIALOGFLOW_DEVELOPER_ACCESS_TOKEN;
 const DIALOGFLOW_CLIENT_ACCESS_TOKEN = process.env.DIALOGFLOW_CLIENT_ACCESS_TOKEN;
 
@@ -11,19 +11,16 @@ Promise.promisifyAll(request);
 
 module.exports = class ServiceDialogflow {
     static query(lang, session_id, query){
-        let url = `${URL_BASE}/query?v=20150910`;
+        lang = encodeURIComponent(lang);
+        session_id = encodeURIComponent(session_id);
+        query = encodeURIComponent(query);
+        let url = `${URL_BASE}/query?v=20150910&query=${query}&lang=${lang}&sessionId=${session_id}`;
         let headers = {
             "Authorization": "Bearer " + DIALOGFLOW_CLIENT_ACCESS_TOKEN
         }
-        let body = {
-            lang: lang,
-            sessionId: session_id,
-            query: encodeURIComponent(query)
-        }
-        return request.postAsync({
+        return request.getAsync({
             url: url,
             headers: headers,
-            body: body,
             json: true
         }).then((response) => {
             debug(response.body);
