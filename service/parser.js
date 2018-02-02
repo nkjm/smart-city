@@ -62,7 +62,6 @@ module.exports = class ServiceParser {
     static by_list(lang, value, acceptable_values, resolve, reject){
         debug("Going to understand value by NLU.");
         return nlu.query(lang, value).then((response) => {
-            debug(response);
             if (response.result.action === "parser"){
                 debug("Entity found.")
                 if (response.result.parameters && response.result.parameters[Object.keys(response.result.parameters)[0]]){

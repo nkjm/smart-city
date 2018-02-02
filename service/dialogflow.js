@@ -22,6 +22,7 @@ module.exports = class ServiceDialogflow {
             resetContexts: true,
             query: sentence
         }
+        debug(header);
         debug(body);
         return request.postAsync({
             url: url,
