@@ -18,7 +18,7 @@ module.exports = class ServiceDialogflow {
         let body = {
             lang: lang,
             sessionId: session_id,
-            query: query
+            query: encodeURIComponent(query)
         }
         return request.postAsync({
             url: url,
