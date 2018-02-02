@@ -135,10 +135,10 @@ module.exports = class SkillJuminhyo {
                 message_to_confirm: (bot, event, context, resolve, reject) => {
                     return resolve({
                         type: "template",
-                        altText: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでよかったでしょうか？`,
+                        altText: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでお間違いないですか？`,
                         template: {
                             type: "confirm",
-                            text: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでよかったでしょうか？`,
+                            text: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでお間違いないですか？`,
                             actions: [
                                 {type: "message", label: "はい", text: "はい"},
                                 {type: "message", label: "いいえ", text: "いいえ"}
@@ -155,7 +155,7 @@ module.exports = class SkillJuminhyo {
                     if (value == "はい"){
                         bot.queue({
                             type: "text",
-                            text: "ハイカラなお名前じゃないですか〜。いいですね。"
+                            text: "ナイスなお名前じゃないですか〜。"
                         });
                     } else {
                         bot.queue({
