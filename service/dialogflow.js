@@ -24,7 +24,7 @@ module.exports = class ServiceDialogflow {
         return request.postAsync({
             url: url,
             headers: headers,
-            body,
+            body: body,
             json: true
         }).then((response) => {
             debug(response.body);
