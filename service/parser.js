@@ -62,9 +62,11 @@ module.exports = class ServiceParser {
 
     static by_list(lang, value, acceptable_values, resolve, reject){
         debug("Going to understand value by NLU.");
+        debug(`lang is ${lang}`);
+        debug(`value is ${value}`);
         const session_id = uuid();
         return nlu.query(lang, session_id, value).then((response) => {
-            if (result.result.action === "parser"){
+            if (response.result.action === "parser"){
                 debug("Entity found.")
                 if (response.result.parameters && response.result.parameters[Object.keys(response.result.parameters)[0]]){
                     if (acceptable_values.includes(response.result.parameters[Object.keys(response.result.parameters)[0]])){
