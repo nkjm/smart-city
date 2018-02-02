@@ -267,7 +267,7 @@ module.exports = class SkillJuminhyo {
         }
 
         // Payment should be LINE Pay
-        return bot.replay({
+        return bot.reply({
             type: "text",
             text: `${name}さん、了解です。決済完了しましたらすぐにご自宅に住民票を発送します。`
         }).then((response) => {
