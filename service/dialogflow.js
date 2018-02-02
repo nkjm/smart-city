@@ -18,12 +18,10 @@ module.exports = class ServiceDialogflow {
         }
         let body = {
             lang: lang,
-            sessionId: "dummy",
+            sessionId: "bot-express-parser",
             resetContexts: true,
             query: sentence
         }
-        debug(headers);
-        debug(body);
         return request.postAsync({
             url: url,
             headers: headers,

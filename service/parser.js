@@ -59,16 +59,13 @@ module.exports = class ServiceParser {
     }
     */
 
-    static by_list(lang, value, acceptable_values, resolve, reject){
+    static by_list(lang, parameter_name, value, acceptable_values, resolve, reject){
         debug("Going to understand value by NLU.");
         return nlu.query(lang, value).then((response) => {
-            if (response.result.action === "parser"){
-                debug("Entity found.")
-                if (response.result.parameters && response.result.parameters[Object.keys(response.result.parameters)[0]]){
-                    if (acceptable_values.includes(response.result.parameters[Object.keys(response.result.parameters)[0]])){
-                        debug("Recognized and accepted the value.");
-                        return resolve(response.result.parameters[Object.keys(response.result.parameters)[0]]);
-                    }
+            if (response.result.parameters[parameter_name]){
+                if (acceptable_values.includes(response.result.parameters[parameter_name])){
+                    debug("Recognized and accepted the value.");
+                    return resolve(response.result.parameters[parameter_name]);
                 }
             }
             return reject();
