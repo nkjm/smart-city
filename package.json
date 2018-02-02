@@ -4,7 +4,7 @@
   "description": "chatbot which can handle the request like id application and large garbage collection",
   "main": "index.js",
   "dependencies": {
-    "bot-express": "^0.1.13",
+    "bot-express": "^0.1.14",
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
