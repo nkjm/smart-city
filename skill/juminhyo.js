@@ -135,10 +135,10 @@ module.exports = class SkillJuminhyo {
                 message_to_confirm: (bot, event, context, resolve, reject) => {
                     return resolve({
                         type: "template",
-                        altText: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでお間違いないですか？`,
+                        altText: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでよろしいでしょうか？`,
                         template: {
                             type: "confirm",
-                            text: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでお間違いないですか？`,
+                            text: `一応ご確認を。${context.confirmed.name.lastname} ${context.confirmed.name.firstname}さんでよろしいでしょうか？`,
                             actions: [
                                 {type: "message", label: "はい", text: "はい"},
                                 {type: "message", label: "いいえ", text: "いいえ"}
