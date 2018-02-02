@@ -18,7 +18,7 @@ module.exports = class ServiceDialogflow {
         }
         let body = {
             lang: lang,
-            session_id: session_id,
+            sessionId: session_id,
             query: query
         }
         return request.postAsync({
