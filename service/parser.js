@@ -63,8 +63,9 @@ module.exports = class ServiceParser {
         debug("Going to understand value by NLU.");
         return nlu.query(lang, value).then((response) => {
             if (response.result.parameters[parameter_name]){
+                debug("Found entities.");
                 if (acceptable_values.includes(response.result.parameters[parameter_name])){
-                    debug("Recognized and accepted the value.");
+                    debug("Accepted the value.");
                     return resolve(response.result.parameters[parameter_name]);
                 }
             }
