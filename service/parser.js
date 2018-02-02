@@ -4,7 +4,6 @@ const debug = require('debug')('bot-express:service');
 const mecab = require("mecabaas-client");
 const zip_code = require("../service/zip-code");
 const nlu = require("../service/dialogflow");
-const uuid = require("uuid/v4");
 Promise = require('bluebird');
 
 module.exports = class ServiceParser {
@@ -62,10 +61,7 @@ module.exports = class ServiceParser {
 
     static by_list(lang, value, acceptable_values, resolve, reject){
         debug("Going to understand value by NLU.");
-        debug(`lang is ${lang}`);
-        debug(`value is ${value}`);
-        const session_id = uuid();
-        return nlu.query(lang, session_id, value).then((response) => {
+        return nlu.query(lang, value).then((response) => {
             debug(response);
             if (response.result.action === "parser"){
                 debug("Entity found.")

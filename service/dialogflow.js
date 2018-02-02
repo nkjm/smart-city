@@ -18,9 +18,11 @@ module.exports = class ServiceDialogflow {
         }
         let body = {
             lang: lang,
-            sessionId: session_id,
+            sessionId: "dummy",
+            resetContexts: true,
             query: query
         }
+        debug(body);
         return request.postAsync({
             url: url,
             headers: headers,
