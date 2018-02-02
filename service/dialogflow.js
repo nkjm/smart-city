@@ -11,12 +11,11 @@ Promise.promisifyAll(request);
 
 module.exports = class ServiceDialogflow {
     static query(lang, session_id, query){
-        let url = `${URL_BASE}/query`;
+        let url = `${URL_BASE}/query?v=20150910`;
         let headers = {
             "Authorization": "Bearer " + DIALOGFLOW_CLIENT_ACCESS_TOKEN
         }
         let body = {
-            v: "20150910",
             lang: lang,
             sessionId: session_id,
             query: query
