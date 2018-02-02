@@ -10,7 +10,7 @@ Promise = require('bluebird');
 Promise.promisifyAll(request);
 
 module.exports = class ServiceDialogflow {
-    static query(lang, session_id, query){
+    static query(lang, sentence){
         let url = `${URL_BASE}/query?v=20150910`;
         let headers = {
             "Authorization": "Bearer " + DIALOGFLOW_CLIENT_ACCESS_TOKEN,
@@ -20,7 +20,7 @@ module.exports = class ServiceDialogflow {
             lang: lang,
             sessionId: "dummy",
             resetContexts: true,
-            query: query
+            query: sentence
         }
         debug(body);
         return request.postAsync({
