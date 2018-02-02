@@ -32,7 +32,7 @@ module.exports = class ServiceParser {
             name.lastname = name_arr[1];
             name.firstname = name_arr[0];
             return resolve(name);
-        } else (name_arr.length === 3){
+        } else if (name_arr.length === 3){
             name.lastname = name_arr[2];
             name.firstname = name_arr[0];
             return resolve(name):
