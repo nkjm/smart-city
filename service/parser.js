@@ -66,6 +66,7 @@ module.exports = class ServiceParser {
         debug(`value is ${value}`);
         const session_id = uuid();
         return nlu.query(lang, session_id, value).then((response) => {
+            debug(response);
             if (response.result.action === "parser"){
                 debug("Entity found.")
                 if (response.result.parameters && response.result.parameters[Object.keys(response.result.parameters)[0]]){

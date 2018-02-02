@@ -11,16 +11,20 @@ Promise.promisifyAll(request);
 
 module.exports = class ServiceDialogflow {
     static query(lang, session_id, query){
-        lang = encodeURIComponent(lang);
-        session_id = encodeURIComponent(session_id);
-        query = encodeURIComponent(query);
-        let url = `${URL_BASE}/query?v=20150910&query=${query}&lang=${lang}&sessionId=${session_id}`;
+        let url = `${URL_BASE}/query?v=20150910`;
         let headers = {
-            "Authorization": "Bearer " + DIALOGFLOW_CLIENT_ACCESS_TOKEN
+            "Authorization": "Bearer " + DIALOGFLOW_CLIENT_ACCESS_TOKEN,
+            "Content-Type": "application/json; charset=utf-8"
         }
-        return request.getAsync({
+        let body = {
+            lang: lang,
+            session_id: session_id,
+            query: query
+        }
+        return request.postAsync({
             url: url,
             headers: headers,
+            body,
             json: true
         }).then((response) => {
             debug(response.body);
