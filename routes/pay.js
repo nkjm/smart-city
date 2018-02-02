@@ -58,6 +58,13 @@ router.get('/confirm', (req, res, next) => {
                 name: "simple-response",
                 fulfillment: {
                     messages: [{
+                        type: 4,
+                        payload: {
+                            type: "sticker",
+                            packageId: 2,
+                            stickerId: 144
+                        }
+                    },{
                         type: 0,
                         speech: `決済が完了しました。`
                     }]

@@ -260,30 +260,35 @@ module.exports = class SkillJuminhyo {
         if (context.confirmed.payment === "代引き"){
             return bot.reply({
                 type: "text",
-                text: `${name}さん、了解です。${address}が身分証のご住所と一致しているか担当者がチェックし、問題なければご住所に住民票をお届けしますね。`
+                text: `${name}さん、了解です。2-3日中に身分証のご住所に住民票をお届けしますね。`
             }).then((response) => {
                 return resolve();
             })
         }
 
         // Payment should be LINE Pay
-        return line_event.fire({
-            type: "bot-express:push",
-            to: {
-                type: "user",
-                userId: bot.extract_sender_id()
-            },
-            intent: {
-                name: "pay",
-                parameters: {
-                    productName: "住民票",
-                    amount: 300,
-                    currency: "JPY",
-                    orderId: `${bot.extract_sender_id()}-${Date.now()}`,
-                    message_text: `了解です。決済完了後に住民票をご自宅に発送します。下記のボタンから決済にお進みください。`
-                }
-            },
-            language: "en"
+        return bot.replay({
+            type: "text",
+            text: `${name}さん、了解です。決済完了しましたらすぐにご自宅に住民票を発送します。`
+        }).then((response) => {
+            return line_event.fire({
+                type: "bot-express:push",
+                to: {
+                    type: "user",
+                    userId: bot.extract_sender_id()
+                },
+                intent: {
+                    name: "pay",
+                    parameters: {
+                        productName: "住民票",
+                        amount: 300,
+                        currency: "JPY",
+                        orderId: `${bot.extract_sender_id()}-${Date.now()}`,
+                        message_text: `下記のボタンから決済にお進みください。`
+                    }
+                },
+                language: "en"
+            });
         }).then((response) => {
             return resolve();
         });
