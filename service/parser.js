@@ -4,11 +4,12 @@ const debug = require('debug')('bot-express:service');
 const mecab = require("mecabaas-client");
 const zip_code = require("../service/zip-code");
 const nlu = require("../service/dialogflow");
+const default_lang = "ja";
 Promise = require('bluebird');
 
 module.exports = class ServiceParser {
-    static name(lang, value, resolve, reject){
-        if (lang === "ja" || !lang){
+    static name(lang = default_lang, value, resolve, reject){
+        if (lang === "ja"){
             return mecab.parse(value).then(
                 (response) => {
                     let name = {};
@@ -64,18 +65,14 @@ module.exports = class ServiceParser {
         );
     }
 
-    /*
-    static by_list(value, acceptable_values, resolve, reject){
-        if (acceptable_values.includes(value)){
-            return resolve(value);
-        }
-        return reject();
-    }
-    */
-
-    static by_list(lang, parameter_name, value, acceptable_values, resolve, reject){
+    static by_list(lang = default_lang, parameter_name, value, acceptable_values, resolve, reject){
         debug("Going to understand value by NLU.");
         return nlu.query(lang, value).then((response) => {
+            if (response.status.code != 200){
+                debug(response.status.errorDetails);
+                return reject();
+            }
+
             if (response.result.parameters[parameter_name]){
                 debug("Found entities.");
                 if (acceptable_values.includes(response.result.parameters[parameter_name])){

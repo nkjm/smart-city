@@ -23,14 +23,17 @@ module.exports = class SkillJuminhyo {
                     }
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(context.sender_language, "type", value, ["世帯全員分", "本人だけ"], resolve, reject);
+                    return parse.by_list(context.sender_language, "type", value, ["世帯全員分", "本人だけ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error){
                         return resolve();
                     }
 
-                    bot.queue({text: `${value}ですね。OKです。`});
+                    bot.queue({
+                        type: "text",
+                        text: `${value}ですね。OKです。`
+                    });
                     return resolve();
                 }
             },
@@ -40,7 +43,7 @@ module.exports = class SkillJuminhyo {
                     text: "次にご本人のことを少々。お名前教えてもらえますか？"
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.name(context.sender_language, value, resolve, reject);
+                    return parse.name(context.sender_language, value, resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
@@ -65,7 +68,7 @@ module.exports = class SkillJuminhyo {
                     text: "郵便番号を教えていただけますか？"
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.zip_code(value, resolve, reject);
+                    return parse.zip_code(value, resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
@@ -125,7 +128,7 @@ module.exports = class SkillJuminhyo {
                     }
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(context.sender_language, "payment", value, ["LINE Pay", "代引き"], resolve, reject);
+                    return parse.by_list(context.sender_language, "payment", value, ["LINE Pay", "代引き"], resolve, reject);
                 }
             }
         }
@@ -147,7 +150,7 @@ module.exports = class SkillJuminhyo {
                     });
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
+                    return parse.by_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
@@ -210,7 +213,7 @@ module.exports = class SkillJuminhyo {
                     });
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
+                    return parse.by_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();

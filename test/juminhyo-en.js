@@ -19,7 +19,7 @@ for (let messenger_option of messenger_options){
     let emu = new Emulator(messenger_option.name, messenger_option.options);
 
     describe("Test juminhyo skill from " + emu.messenger_type, function(){
-        let user_id = "juminhyo";
+        let user_id = "juminhyo-en";
 
         describe("Invalid type", function(){
             it("will ask type once again.", function(){
@@ -32,14 +32,14 @@ for (let messenger_option of messenger_options){
                             intent: {
                                 name: "juminhyo"
                             },
-                            language: "ja"
+                            language: "en"
                         })
                     });
                     return emu.send(event);
                 }).then(function(context){
                     context.intent.name.should.equal("juminhyo");
                     context.confirming.should.equal("type");
-                    let event = emu.create_message_event(user_id, "他人の分");
+                    let event = emu.create_message_event(user_id, "for others");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("type");
@@ -48,7 +48,7 @@ for (let messenger_option of messenger_options){
         });
 
         describe("Incomplete name", function(){
-            it("will ask lastname and first name.", function(){
+            it("will ask name again.", function(){
                 this.timeout(8000);
 
                 return emu.clear_context(user_id).then(function(){
@@ -58,29 +58,21 @@ for (let messenger_option of messenger_options){
                             intent: {
                                 name: "juminhyo"
                             },
-                            language: "ja"
+                            language: "en"
                         })
                     });
                     return emu.send(event);
                 }).then(function(context){
                     context.intent.name.should.equal("juminhyo");
                     context.confirming.should.equal("type");
-                    let event = emu.create_message_event(user_id, "世帯全員分");
+                    let event = emu.create_message_event(user_id, "all households");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("name");
-                    let event = emu.create_message_event(user_id, "中嶋");
+                    let event = emu.create_message_event(user_id, "kazuki");
                     return emu.send(event);
                 }).then(function(context){
-                    context.confirming.should.equal("lastname");
-                    let event = emu.create_message_event(user_id, "中嶋");
-                    return emu.send(event);
-                }).then(function(context){
-                    context.confirming.should.equal("firstname");
-                    let event = emu.create_message_event(user_id, "一樹");
-                    return emu.send(event);
-                }).then(function(context){
-                    context.confirming.should.equal("zip_code");
+                    context.confirming.should.equal("name");
                 });
             });
         });
@@ -96,71 +88,33 @@ for (let messenger_option of messenger_options){
                             intent: {
                                 name: "juminhyo"
                             },
-                            language: "ja"
+                            language: "en"
                         })
                     });
                     return emu.send(event);
                 }).then(function(context){
                     context.intent.name.should.equal("juminhyo");
                     context.confirming.should.equal("type");
-                    let event = emu.create_message_event(user_id, "世帯全員分");
+                    let event = emu.create_message_event(user_id, "all households");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("name");
-                    let event = emu.create_message_event(user_id, "中嶋一樹");
+                    let event = emu.create_message_event(user_id, "kazuki nakajima");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_name_correct");
-                    let event = emu.create_message_event(user_id, "いいえ");
+                    let event = emu.create_message_event(user_id, "No");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("lastname");
-                    let event = emu.create_message_event(user_id, "中嶋");
+                    let event = emu.create_message_event(user_id, "nakajima");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("firstname");
-                    let event = emu.create_message_event(user_id, "一樹");
+                    let event = emu.create_message_event(user_id, "kazuki");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("zip_code");
-                });
-            });
-        });
-
-        describe("Invalid zip code", function(){
-            it("will ask zip code once again.", function(){
-                this.timeout(8000);
-
-                return emu.clear_context(user_id).then(function(){
-                    let event = emu.create_postback_event(user_id, {
-                        data: JSON.stringify({
-                            _type: "intent",
-                            intent: {
-                                name: "juminhyo"
-                            },
-                            language: "ja"
-                        })
-                    });
-                    return emu.send(event);
-                }).then(function(context){
-                    context.intent.name.should.equal("juminhyo");
-                    context.confirming.should.equal("type");
-                    let event = emu.create_message_event(user_id, "世帯全員分");
-                    return emu.send(event);
-                }).then(function(context){
-                    context.confirming.should.equal("name");
-                    let event = emu.create_message_event(user_id, "中嶋一樹");
-                    return emu.send(event);
-                }).then(function(context){
-                    context.confirming.should.equal("is_name_correct");
-                    let event = emu.create_message_event(user_id, "はい");
-                    return emu.send(event);
-                }).then(function(context){
-                    context.confirming.should.equal("zip_code");
-                    let event = emu.create_message_event(user_id, "000-0000");
-                    return emu.send(event);
-                }).then(function(context){
-                    context.confirming.should.equal("address");
                 });
             });
         });
@@ -176,22 +130,22 @@ for (let messenger_option of messenger_options){
                             intent: {
                                 name: "juminhyo"
                             },
-                            language: "ja"
+                            language: "en"
                         })
                     });
                     return emu.send(event);
                 }).then(function(context){
                     context.intent.name.should.equal("juminhyo");
                     context.confirming.should.equal("type");
-                    let event = emu.create_message_event(user_id, "世帯全員分");
+                    let event = emu.create_message_event(user_id, "all households");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("name");
-                    let event = emu.create_message_event(user_id, "中嶋一樹");
+                    let event = emu.create_message_event(user_id, "kazuki nakajima");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_name_correct");
-                    let event = emu.create_message_event(user_id, "はい");
+                    let event = emu.create_message_event(user_id, "Yes");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("zip_code");
@@ -199,7 +153,7 @@ for (let messenger_option of messenger_options){
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_city_correct");
-                    let event = emu.create_message_event(user_id, "いいえ");
+                    let event = emu.create_message_event(user_id, "No");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("zip_code");
@@ -218,22 +172,22 @@ for (let messenger_option of messenger_options){
                             intent: {
                                 name: "juminhyo"
                             },
-                            language: "ja"
+                            language: "en"
                         })
                     });
                     return emu.send(event);
                 }).then(function(context){
                     context.intent.name.should.equal("juminhyo");
                     context.confirming.should.equal("type");
-                    let event = emu.create_message_event(user_id, "世帯全員分");
+                    let event = emu.create_message_event(user_id, "all households");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("name");
-                    let event = emu.create_message_event(user_id, "中嶋一樹");
+                    let event = emu.create_message_event(user_id, "kazuki nakajima");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_name_correct");
-                    let event = emu.create_message_event(user_id, "はい");
+                    let event = emu.create_message_event(user_id, "Yes");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("zip_code");
@@ -241,7 +195,7 @@ for (let messenger_option of messenger_options){
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_city_correct");
-                    let event = emu.create_message_event(user_id, "はい");
+                    let event = emu.create_message_event(user_id, "Yes");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("street");
