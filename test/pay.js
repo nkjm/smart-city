@@ -53,7 +53,7 @@ for (let messenger_option of messenger_options){
                     context.previous.message[0].message.template.text.should.equal("下記のボタンから決済にお進みください。");
                     context.previous.message[0].message.template.actions.should.lengthOf(1);
                     context.previous.message[0].message.template.actions[0].type.should.equal("uri");
-                    context.previous.message[0].message.template.actions[0].label.should.equal("LINE Payで300円を決済");
+                    context.previous.message[0].message.template.actions[0].label.should.equal("300円を決済する");
                     context.previous.message[0].message.template.actions[0].uri.should.match(/^https:\/\/sandbox-web-pay\.line\.me\/web\/payment\/wait\?transactionReserveId/);
                 });
             });

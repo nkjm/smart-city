@@ -184,7 +184,7 @@ module.exports = class SkillGarbageCollection {
                     }
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(value, ["LINE Pay", "コンビニ"], resolve, reject);
+                    parse.by_nlu_with_list(context.sender_language, "payment", value, ["LINE Pay", "コンビニ"], resolve, reject);
                 }
             }
         }
@@ -206,7 +206,7 @@ module.exports = class SkillGarbageCollection {
                     });
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(value, ["はい", "いいえ"], resolve, reject);
+                    parse.by_nlu_with_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
@@ -267,7 +267,7 @@ module.exports = class SkillGarbageCollection {
                     });
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.by_list(value, ["はい", "いいえ"], resolve, reject);
+                    parse.by_nlu_with_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();

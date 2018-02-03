@@ -65,7 +65,15 @@ module.exports = class ServiceParser {
         );
     }
 
-    static by_list(lang = default_lang, parameter_name, value, acceptable_values, resolve, reject){
+    static by_list(value, acceptable_values, resolve, reject){
+        if (acceptable_values.includes(value)){
+            debug("Accepted the value.");
+            return resolve(value);
+        }
+        return reject();
+    }
+
+    static by_nlu_with_list(lang = default_lang, parameter_name, value, acceptable_values, resolve, reject){
         debug("Going to understand value by NLU.");
         return nlu.query(lang, value).then((response) => {
             if (response.status.code != 200){

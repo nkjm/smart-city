@@ -23,7 +23,7 @@ module.exports = class SkillJuminhyo {
                     }
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    return parse.by_list(context.sender_language, "type", value, ["世帯全員分", "本人だけ"], resolve, reject);
+                    return parse.by_nlu_with_list(context.sender_language, "type", value, ["世帯全員分", "本人だけ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error){
@@ -128,7 +128,7 @@ module.exports = class SkillJuminhyo {
                     }
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    return parse.by_list(context.sender_language, "payment", value, ["LINE Pay", "代引き"], resolve, reject);
+                    return parse.by_nlu_with_list(context.sender_language, "payment", value, ["LINE Pay", "代引き"], resolve, reject);
                 }
             }
         }
@@ -150,7 +150,7 @@ module.exports = class SkillJuminhyo {
                     });
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    return parse.by_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
+                    return parse.by_nlu_with_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
@@ -213,7 +213,7 @@ module.exports = class SkillJuminhyo {
                     });
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    return parse.by_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
+                    return parse.by_nlu_with_list(context.sender_language, "yes_no", value, ["はい", "いいえ"], resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();

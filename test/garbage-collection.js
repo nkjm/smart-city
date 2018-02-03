@@ -31,7 +31,8 @@ for (let messenger_option of messenger_options){
                             _type: "intent",
                             intent: {
                                 name: "garbage-collection"
-                            }
+                            },
+                            language: "ja"
                         })
                     });
                     return emu.send(event);
