@@ -62,7 +62,8 @@ router.get('/confirm', (req, res, next) => {
                         speech: `決済が完了しました。`
                     }]
                 }
-            }
+            },
+            language: reservation.language
         });
     }, (response) => {
         debug("Failed to capture payment.");

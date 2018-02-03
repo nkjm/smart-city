@@ -45,6 +45,7 @@ module.exports = class SkillPay {
         return pay.reserve(reservation).then((response) => {
             reservation.transactionId = response.info.transactionId;
             reservation.userId = bot.extract_sender_id();
+            reservation.language = context.sender_language;
             cache.put(reservation.orderId, reservation);
 
             // Now we can provide payment URL.
