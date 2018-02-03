@@ -85,7 +85,7 @@ module.exports = class SkillGarbageCollection {
                     text: "お名前教えてもらえますか？"
                 },
                 parser: (value, bot, event, context, resolve, reject) => {
-                    parse.name(value, resolve, reject);
+                    parse.name(context.sender_language, value, resolve, reject);
                 },
                 reaction: (error, value, bot, event, context, resolve, reject) => {
                     if (error) return resolve();
