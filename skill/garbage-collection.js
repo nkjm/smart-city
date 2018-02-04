@@ -301,7 +301,7 @@ module.exports = class SkillGarbageCollection {
                 }
             }
         }
-        this.clear_context_on_finish = true;
+        this.clear_context_on_finish = false;
     }
 
     finish(bot, event, context, resolve, reject){
@@ -325,7 +325,7 @@ module.exports = class SkillGarbageCollection {
         // Payment should be LINE Pay
         return bot.reply({
             type: "text",
-            text: `${name}さん、大型ゴミの収集を承りました。`
+            text: `大型ゴミの収集を承りました。`
         }).then((response) => {
             return line_event.fire({
                 type: "bot-express:push",

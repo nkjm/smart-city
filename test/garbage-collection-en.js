@@ -32,14 +32,14 @@ for (let messenger_option of messenger_options){
                             intent: {
                                 name: "garbage-collection"
                             },
-                            language: "ja"
+                            language: "en"
                         })
                     });
                     return emu.send(event);
                 }).then(function(context){
                     context.intent.name.should.equal("garbage-collection");
                     context.confirming.should.equal("garbage");
-                    let event = emu.create_message_event(user_id, "ソファ");
+                    let event = emu.create_message_event(user_id, "sofa");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("quantity");
@@ -47,11 +47,11 @@ for (let messenger_option of messenger_options){
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("name");
-                    let event = emu.create_message_event(user_id, "中嶋一樹");
+                    let event = emu.create_message_event(user_id, "kazuki nakajima");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_name_correct");
-                    let event = emu.create_message_event(user_id, "はい");
+                    let event = emu.create_message_event(user_id, "yes");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("zip_code");
@@ -59,7 +59,7 @@ for (let messenger_option of messenger_options){
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("is_city_correct");
-                    let event = emu.create_message_event(user_id, "はい");
+                    let event = emu.create_message_event(user_id, "yes");
                     return emu.send(event);
                 }).then(function(context){
                     context.confirming.should.equal("street");
@@ -78,7 +78,7 @@ for (let messenger_option of messenger_options){
                     let event = emu.create_message_event(user_id, "LINE Pay");
                     return emu.send(event);
                 }).then(function(context){
-                    context.previous.message[0].message.text.should.equal("大型ゴミの収集を承りました。");
+                    context.previous.message[0].message.text.should.equal("We have received collection of large garbage.");
                 });
             });
         });

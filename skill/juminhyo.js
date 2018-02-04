@@ -248,7 +248,7 @@ module.exports = class SkillJuminhyo {
             }
         }
 
-        this.clear_context_on_finish = true;
+        this.clear_context_on_finish = false;
     }
 
     finish(bot, event, context, resolve, reject){
